@@ -7,15 +7,29 @@
 //
 
 import UIKit
+import SwiftyJSON
 
-class SEReportsTableViewController: UITableViewController {
+class SEReportsTableViewController: UITableViewController, HTTPClientDelegate {
 
+    let httpClient = HTTPClient()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Reports"
-        // Do any additional setup after loading the view, typically from a nib.
+        self.title = "Travel Reports"
+        self.httpClient.delegate = self
+        self.httpClient.getRidesRequest()
     }
 
+    func didReceiveData(json: [JSON]) {
+        if let distance = json[0]["distance"].string{
+            print(distance)
+        }
+    }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
