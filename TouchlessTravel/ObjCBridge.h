@@ -7,7 +7,6 @@
 //
 
 #import <EstimoteSDK/EstimoteSDK.h>
-#import <Mantle/Mantle.h>
 
 #ifndef ObjCBridge_h
 #define ObjCBridge_h

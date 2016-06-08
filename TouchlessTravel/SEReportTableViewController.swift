@@ -3,12 +3,13 @@
 //  TouchlessTravel
 //
 //  Created by Anne-Sophie Ettl on 06.11.15.
-//  Copyright © 2015 Hackathon. All rights reserved.
+//  Copyright © 2015 Anne-Sophie Ettl. All rights reserved.
 //
 
 import UIKit
 import SwiftyJSON
 
+//no time to finish during hackathon :)
 class SEReportTableViewController: UITableViewController, HTTPClientDelegate {
     
     let httpClient = HTTPClient()

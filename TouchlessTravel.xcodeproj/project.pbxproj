@@ -8,20 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		7BBE5922AA45AF6DF1D45933 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C8B6545A97322DD7D33470 /* Pods.framework */; };
-		E456A82D1BEDE635002D652E /* SETripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E456A82C1BEDE635002D652E /* SETripTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		E456A82F1BEE3FF0002D652E /* SECheckInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E456A82E1BEE3FF0002D652E /* SECheckInViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		E456A82D1BEDE635002D652E /* SETripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E456A82C1BEDE635002D652E /* SETripTableViewCell.swift */; };
+		E456A82F1BEE3FF0002D652E /* SECheckInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E456A82E1BEE3FF0002D652E /* SECheckInViewController.swift */; };
 		E4AC64D51BED62DF00A6F6BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AC64D41BED62DF00A6F6BD /* AppDelegate.swift */; };
 		E4AC64D71BED62DF00A6F6BD /* SEReportsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AC64D61BED62DF00A6F6BD /* SEReportsTableViewController.swift */; };
 		E4AC64DC1BED62DF00A6F6BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4AC64DA1BED62DF00A6F6BD /* Main.storyboard */; };
 		E4AC64DE1BED62DF00A6F6BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4AC64DD1BED62DF00A6F6BD /* Assets.xcassets */; };
 		E4AC64E11BED62DF00A6F6BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4AC64DF1BED62DF00A6F6BD /* LaunchScreen.storyboard */; };
 		E4AC64EC1BED62DF00A6F6BD /* TouchlessTravelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AC64EB1BED62DF00A6F6BD /* TouchlessTravelUITests.swift */; };
-		E4C677E71BEF414B008A6E6C /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C677E61BEF414B008A6E6C /* Ride.swift */; settings = {ASSET_TAGS = (); }; };
-		E4C677EA1BEF52D0008A6E6C /* SEReportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C677E91BEF52D0008A6E6C /* SEReportTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		E4C677EC1BEF5AF7008A6E6C /* cache.json in Resources */ = {isa = PBXBuildFile; fileRef = E4C677EB1BEF5AF7008A6E6C /* cache.json */; settings = {ASSET_TAGS = (); }; };
-		E4C677EE1BEF6740008A6E6C /* SEMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C677ED1BEF6740008A6E6C /* SEMoreTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		E4F805431BEE8151007A0BA0 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F805421BEE8151007A0BA0 /* HTTPClient.swift */; settings = {ASSET_TAGS = (); }; };
-		E4F805451BEE9D68007A0BA0 /* SECurrentTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F805441BEE9D68007A0BA0 /* SECurrentTripViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		E4C677E71BEF414B008A6E6C /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C677E61BEF414B008A6E6C /* Ride.swift */; };
+		E4C677EA1BEF52D0008A6E6C /* SEReportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C677E91BEF52D0008A6E6C /* SEReportTableViewController.swift */; };
+		E4C677EC1BEF5AF7008A6E6C /* cache.json in Resources */ = {isa = PBXBuildFile; fileRef = E4C677EB1BEF5AF7008A6E6C /* cache.json */; };
+		E4C677EE1BEF6740008A6E6C /* SEMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C677ED1BEF6740008A6E6C /* SEMoreTableViewCell.swift */; };
+		E4F805431BEE8151007A0BA0 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F805421BEE8151007A0BA0 /* HTTPClient.swift */; };
+		E4F805451BEE9D68007A0BA0 /* SECurrentTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F805441BEE9D68007A0BA0 /* SECurrentTripViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -451,7 +451,7 @@
 				INFOPLIST_FILE = TouchlessTravel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.finarx.TouchlessTravel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.soet.TouchlessTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_NAME}/ObjCBridge.h";
 			};
@@ -466,7 +466,7 @@
 				INFOPLIST_FILE = TouchlessTravel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.finarx.TouchlessTravel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.soet.TouchlessTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_NAME}/ObjCBridge.h";
 			};

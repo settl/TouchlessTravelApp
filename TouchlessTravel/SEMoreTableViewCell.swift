@@ -3,7 +3,7 @@
 //  TouchlessTravel
 //
 //  Created by Anne-Sophie Ettl on 08.11.15.
-//  Copyright © 2015 Hackathon. All rights reserved.
+//  Copyright © 2015 Anne-Sophie Ettl. All rights reserved.
 //
 
 import Foundation

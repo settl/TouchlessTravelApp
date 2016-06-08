@@ -3,7 +3,7 @@
 //  NoTouchTravel
 //
 //  Created by Anne-Sophie Ettl on 06.11.15.
-//  Copyright © 2015 Hackathon. All rights reserved.
+//  Copyright © 2015 Anne-Sophie Ettl. All rights reserved.
 //
 
 import UIKit
@@ -24,12 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         identifier: "beaconRegion2")
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        if (NSUserDefaults.standardUserDefaults().objectForKey("checkedIn") == nil) {
-            NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: false), forKey: "checkedIn")
-        }
-        
+
+        NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: false), forKey: "checkedIn")
+
         UIApplication.sharedApplication().registerUserNotificationSettings(
             UIUserNotificationSettings(forTypes: .Alert, categories: nil))
         
@@ -45,26 +42,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
             self.tabbarController = self.window!.rootViewController as! UITabBarController
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleCheckIn:", name: "didEnterRegion", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleCheckOut:", name: "didExitRegion", object: nil)
+        setupNotifications()
 
         return true
     }
     
     func beaconManager(manager: AnyObject, didEnterRegion region: CLBeaconRegion) {
         
-        NSNotificationCenter.defaultCenter().postNotificationName("didEnterRegion", object: nil)
-        NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: true), forKey: "checkedIn")
+        // we may have already checked in via "Go!" button - in that case do nothing
+        if (NSUserDefaults.standardUserDefaults().boolForKey("checkedIn") == false) {
+            NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: true), forKey: "checkedIn")
+            NSNotificationCenter.defaultCenter().postNotificationName("didEnterRegion", object: nil)
+        }
     }
     
     func beaconManager(manager: AnyObject, didExitRegion region: CLBeaconRegion) {
         
-        NSNotificationCenter.defaultCenter().postNotificationName("didExitRegion", object: nil)
-        NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: false), forKey: "checkedIn")
-
+        // we may have already checked out via "Exit" button - in that case do nothing
+        if (NSUserDefaults.standardUserDefaults().boolForKey("checkedIn") == true) {
+            NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: false), forKey: "checkedIn")
+            NSNotificationCenter.defaultCenter().postNotificationName("didExitRegion", object: nil)
+        }
     }
     
-    func handleCheckIn(notification:NSNotification) {
+    func handleDidEnterRegion(notification:NSNotification) {
+        
         self.httpClient.sendEnterRegionRequest()
         
         let notification = UILocalNotification()
@@ -73,29 +75,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         
         let controller = self.tabbarController.viewControllers![self.tabbarController.selectedIndex]
         
+        // show modal viewcontroller instead of alertcontroller for final presentation
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc: UIViewController = storyboard.instantiateViewControllerWithIdentifier("CheckIn")
         controller.presentViewController(vc, animated: true, completion: {
-            self.performSelector(Selector("dismissCheckinViewController"), withObject: self, afterDelay: 4.0)
+            self.performSelector(#selector(AppDelegate.dismissCheckinViewController), withObject: self, afterDelay: 1.0)
         })
     }
     
-    func handleCheckOut(notification:NSNotification) {
-        self.httpClient.sendLeaveRegionRequest()
+    func handleManualCheckIn(notification:NSNotification) {
         
+        self.beaconManager.stopMonitoringForRegion(self.beaconRegion)
+        NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: true), forKey: "checkedIn")
+
+        self.httpClient.sendEnterRegionRequest()
+        
+        let controller = self.tabbarController.viewControllers![self.tabbarController.selectedIndex]
+        
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc: UIViewController = storyboard.instantiateViewControllerWithIdentifier("CheckIn")
+        controller.presentViewController(vc, animated: true, completion: {
+            self.performSelector(#selector(AppDelegate.dismissCheckinViewController), withObject: self, afterDelay: 1.0)
+        })
+    }
+    
+    func handleDidExitRegion(notification:NSNotification) {
+        
+        self.httpClient.sendLeaveRegionRequest()
+
         let notification = UILocalNotification()
         notification.alertBody = "You left U9 at Bergfriedhof"
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)
-        
+
+        self.beaconManager.startMonitoringForRegion(self.beaconRegion)
+
         let controller = self.tabbarController.viewControllers![self.tabbarController.selectedIndex]
         
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc: UIViewController = storyboard.instantiateViewControllerWithIdentifier("CheckOut")
         
         controller.presentViewController(vc, animated: true, completion: {
-            self.performSelector(Selector("dismissCheckinViewController"), withObject: self, afterDelay: 4.0)
+            self.performSelector(#selector(AppDelegate.dismissCheckinViewController), withObject: self, afterDelay: 1.0)
         })
-
     }
     
     func dismissCheckinViewController() {
@@ -117,9 +138,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         NSLog("Error: %@", error);
     }
     
-    
     func locationManager(manager: CLLocationManager!, rangingBeaconsDidFailForRegion region: CLBeaconRegion!, withError error: NSError!) {
         NSLog("Error: %@", error);
+    }
+    
+    func setupNotifications() {
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.handleDidEnterRegion(_:)), name: "didEnterRegion", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.handleDidExitRegion(_:)), name: "didExitRegion", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.handleManualCheckIn(_:)), name: "manualCheckIn", object: nil)
     }
     
     func applicationWillResignActive(application: UIApplication) {
@@ -134,6 +161,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     
     func applicationWillEnterForeground(application: UIApplication) {
         NSNotificationCenter.defaultCenter().postNotificationName("willEnterForeground", object: nil)
+        self.beaconManager.startMonitoringForRegion(self.beaconRegion)
 
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
@@ -141,32 +169,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
-    
-    /*func sendRegionRequest(url: String) {
-        
-        let parameters = [
-            "beaconId": beaconID,
-            "userId": username,
-            "timestamp": "234324234"
-        ]
-        
-        Alamofire.request(.POST, server_url + url, parameters: parameters, encoding: .JSON)
-            .responseJSON { response in
-                print(response.request)  // original URL request
-                NSLog("Enter region event sent")
-
-                switch response.result {
-                case .Success(let JSON):
-                    print("Success with JSON: \(JSON)")
-                    
-                case .Failure(let error):
-                    print("Request failed with error: \(error)")
-                    
-                    if let data = response.data {
-                        print("Response data: \(NSString(data: data, encoding: NSUTF8StringEncoding)!)")
-                    }
-                }
-        }
-    }*/
 }
 

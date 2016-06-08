@@ -3,7 +3,7 @@
 //  TouchlessTravel
 //
 //  Created by Anne-Sophie Ettl on 07.11.15.
-//  Copyright © 2015 Hackathon. All rights reserved.
+//  Copyright © 2015 Anne-Sophie Ettl. All rights reserved.
 //
 
 import Foundation
@@ -25,7 +25,7 @@ class HTTPClient {
     func createQRCodeFromURL() -> NSString {
         
         let timestamp = String(NSDate().timeIntervalSince1970)
-    
+        
         let urlString = server_url + "app/api/ticket-control?userId=" + username + "&" + "beaconId=" + beaconID +
             "&" + "timestamp=" + timestamp
         return urlString
