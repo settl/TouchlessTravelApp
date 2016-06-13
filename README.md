@@ -32,13 +32,15 @@ B2B: Local public transport providers, taxi companies, train operators
 4. Analytics webapp - HTML5/CSS/JS webapp for public service providers to monitor the usage of vehicles in realtime.
 
 The following figure visualizes the systems architecture:
+
 ![architecture](/readme_images/architecture.png)
 
 
 ### Show me something!
 
 [Intro](https://touchless-travel.herokuapp.com/webapp/intro.html)
-[Map](http://touchless-travel.herokuapp.com/webapp/index.html)
+
+[Landing Page + Map](http://touchless-travel.herokuapp.com/webapp/index.html)
 
 ![screenshot](/readme_images/screenshot.png)
 
