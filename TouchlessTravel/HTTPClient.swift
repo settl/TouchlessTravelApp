@@ -24,16 +24,15 @@ class HTTPClient {
     
     func createQRCodeFromURL() -> NSString {
         
-        let timestamp = String(NSDate().timeIntervalSince1970)
+        let timestamp = String(Date().timeIntervalSince1970)
         
         let urlString = server_url + "app/api/ticket-control?userId=" + username + "&" + "beaconId=" + beaconID +
             "&" + "timestamp=" + timestamp
-        return urlString
+        return urlString as NSString
     }
     
     func getRidesRequest() {
-
-        Alamofire.request(.GET, server_url + "app/api/users/" + username + "/rides")
+        Alamofire.request(server_url + "app/api/users/" + username + "/rides")
             .responseJSON { response in
                 
                 guard let value = response.result.value else {
@@ -67,30 +66,30 @@ class HTTPClient {
         sendLeaveEnterRegionRequest(leave)
     }
     
-    func sendLeaveEnterRegionRequest(url: String) {
+    func sendLeaveEnterRegionRequest(_ url: String) {
         
-        let timestamp = String(NSDate().timeIntervalSince1970)
-        
-        let parameters = [
+        let urlString: URLConvertible = server_url + url
+        let timestamp = String(Date().timeIntervalSince1970)
+        let parameters: Dictionary<String, Any> = [
             "beaconId": beaconID,
             "userId": username,
             "timestamp": timestamp
         ]
-        
-        Alamofire.request(.POST, server_url + url, parameters: parameters, encoding: .JSON)
+ 
+        Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil)
             .responseJSON { response in
-                print(response.request)  // original URL request
+                print(response.request as Any)  // original URL request
                 NSLog("Enter region event sent")
                 
                 switch response.result {
-                case .Success(let JSON):
+                case .success(let JSON):
                     print("Success with JSON: \(JSON)")
                     
-                case .Failure(let error):
+                case .failure(let error):
                     print("Request failed with error: \(error)")
                     
                     if let data = response.data {
-                        print("Response data: \(NSString(data: data, encoding: NSUTF8StringEncoding)!)")
+                        print("Response data: \(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)")
                     }
                 }
         }
@@ -99,5 +98,5 @@ class HTTPClient {
 }
 
 protocol HTTPClientDelegate {
-    func didReceiveData(json: [JSON])
+    func didReceiveData(_ json: [JSON])
 }

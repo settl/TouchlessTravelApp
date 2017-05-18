@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7BBE5922AA45AF6DF1D45933 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C8B6545A97322DD7D33470 /* Pods.framework */; };
+		2072788EA5A2DD9F19D8C9CE /* Pods_TouchlessTravel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5493FC661493D8D9B9FF2E /* Pods_TouchlessTravel.framework */; };
 		E456A82D1BEDE635002D652E /* SETripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E456A82C1BEDE635002D652E /* SETripTableViewCell.swift */; };
 		E456A82F1BEE3FF0002D652E /* SECheckInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E456A82E1BEE3FF0002D652E /* SECheckInViewController.swift */; };
 		E4AC64D51BED62DF00A6F6BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AC64D41BED62DF00A6F6BD /* AppDelegate.swift */; };
@@ -36,8 +36,11 @@
 
 /* Begin PBXFileReference section */
 		131B2033EC037EE5FB5F58C2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		1A5493FC661493D8D9B9FF2E /* Pods_TouchlessTravel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TouchlessTravel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45C8B6545A97322DD7D33470 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8566B15B2479236B8087A8C1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		8D5D589903EAE59823AF9AF0 /* Pods-TouchlessTravel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouchlessTravel.release.xcconfig"; path = "Pods/Target Support Files/Pods-TouchlessTravel/Pods-TouchlessTravel.release.xcconfig"; sourceTree = "<group>"; };
+		96CF0575D821F0B3B24E6403 /* Pods-TouchlessTravel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouchlessTravel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TouchlessTravel/Pods-TouchlessTravel.debug.xcconfig"; sourceTree = "<group>"; };
 		E456A82C1BEDE635002D652E /* SETripTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SETripTableViewCell.swift; sourceTree = "<group>"; };
 		E456A82E1BEE3FF0002D652E /* SECheckInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SECheckInViewController.swift; sourceTree = "<group>"; };
 		E4AC64D11BED62DF00A6F6BD /* TouchlessTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchlessTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,7 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BBE5922AA45AF6DF1D45933 /* Pods.framework in Frameworks */,
+				2072788EA5A2DD9F19D8C9CE /* Pods_TouchlessTravel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				45C8B6545A97322DD7D33470 /* Pods.framework */,
+				1A5493FC661493D8D9B9FF2E /* Pods_TouchlessTravel.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -91,6 +95,8 @@
 			children = (
 				131B2033EC037EE5FB5F58C2 /* Pods.debug.xcconfig */,
 				8566B15B2479236B8087A8C1 /* Pods.release.xcconfig */,
+				96CF0575D821F0B3B24E6403 /* Pods-TouchlessTravel.debug.xcconfig */,
+				8D5D589903EAE59823AF9AF0 /* Pods-TouchlessTravel.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -161,12 +167,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4AC64F01BED62DF00A6F6BD /* Build configuration list for PBXNativeTarget "TouchlessTravel" */;
 			buildPhases = (
-				F54CDF273ABC4370DA7525E1 /* Check Pods Manifest.lock */,
+				F54CDF273ABC4370DA7525E1 /* [CP] Check Pods Manifest.lock */,
 				E4AC64CD1BED62DF00A6F6BD /* Sources */,
 				E4AC64CE1BED62DF00A6F6BD /* Frameworks */,
 				E4AC64CF1BED62DF00A6F6BD /* Resources */,
-				5DFF6FF58C71F4852974C525 /* Embed Pods Frameworks */,
-				4F983E0DDF79CB380B89DF1E /* Copy Pods Resources */,
+				5DFF6FF58C71F4852974C525 /* [CP] Embed Pods Frameworks */,
+				4F983E0DDF79CB380B89DF1E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -201,11 +207,13 @@
 		E4AC64C91BED62DF00A6F6BD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Hackathon;
 				TargetAttributes = {
 					E4AC64D01BED62DF00A6F6BD = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 24TAK62HEK;
+						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -214,6 +222,7 @@
 					};
 					E4AC64E61BED62DF00A6F6BD = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = E4AC64D01BED62DF00A6F6BD;
 					};
 				};
@@ -259,49 +268,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4F983E0DDF79CB380B89DF1E /* Copy Pods Resources */ = {
+		4F983E0DDF79CB380B89DF1E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TouchlessTravel/Pods-TouchlessTravel-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5DFF6FF58C71F4852974C525 /* Embed Pods Frameworks */ = {
+		5DFF6FF58C71F4852974C525 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TouchlessTravel/Pods-TouchlessTravel-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F54CDF273ABC4370DA7525E1 /* Check Pods Manifest.lock */ = {
+		F54CDF273ABC4370DA7525E1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -374,8 +383,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -418,8 +429,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -438,15 +451,17 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		E4AC64F11BED62DF00A6F6BD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 131B2033EC037EE5FB5F58C2 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 96CF0575D821F0B3B24E6403 /* Pods-TouchlessTravel.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 24TAK62HEK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TouchlessTravel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -454,14 +469,16 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.soet.TouchlessTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_NAME}/ObjCBridge.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		E4AC64F21BED62DF00A6F6BD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8566B15B2479236B8087A8C1 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 8D5D589903EAE59823AF9AF0 /* Pods-TouchlessTravel.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 24TAK62HEK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TouchlessTravel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -469,6 +486,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.soet.TouchlessTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_NAME}/ObjCBridge.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -479,6 +497,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lab75.TouchlessTravelUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = TouchlessTravel;
 				USES_XCTRUNNER = YES;
 			};
@@ -491,6 +510,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lab75.TouchlessTravelUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = TouchlessTravel;
 				USES_XCTRUNNER = YES;
 			};

@@ -25,32 +25,32 @@ class SEReportTableViewController: UITableViewController, HTTPClientDelegate {
         getCachedJSON()
     }
     
-    func didReceiveData(json: [JSON]) {
+    func didReceiveData(_ json: [JSON]) {
         self.datasource = json
         self.tableView.reloadData()
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 1) {
             return 3
         }
         return 1
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 5
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if (indexPath.section == 0) {
-            let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
             cell.textLabel!.text = "November 2015"
             return cell
         }
         
         if (indexPath.section == 1) {
-            let cell = tableView.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as! SETripTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! SETripTableViewCell
             
             if (self.datasource[indexPath.row]["vehicle"]["vtype"].string == "TRAM") {
                 cell.iconImageView!.image = UIImage(named: "icon-tram")
@@ -68,25 +68,25 @@ class SEReportTableViewController: UITableViewController, HTTPClientDelegate {
         }
         
         if (indexPath.section == 2 || indexPath.section == 4) {
-            let cell = tableView.dequeueReusableCellWithIdentifier("MoreCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MoreCell", for: indexPath)
             return cell
         }
         
         if (indexPath.section == 3) {
-            let cell = tableView.dequeueReusableCellWithIdentifier("OverviewCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OverviewCell", for: indexPath)
             return cell
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel!.text = "November 2015"
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (indexPath.section == 1) {
             return 80.0
         }
@@ -102,9 +102,9 @@ class SEReportTableViewController: UITableViewController, HTTPClientDelegate {
     }
     
     func getCachedJSON() {
-        if let path = NSBundle.mainBundle().pathForResource("cache", ofType: "json") {
+        if let path = Bundle.main.path(forResource: "cache", ofType: "json") {
             do {
-                let data = try NSData(contentsOfURL: NSURL(fileURLWithPath: path), options: NSDataReadingOptions.DataReadingMappedIfSafe)
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: NSData.ReadingOptions.mappedIfSafe)
                 let jsonObj = JSON(data: data)
                 if jsonObj != JSON.null {
                     //print("jsonData:\(jsonObj)")

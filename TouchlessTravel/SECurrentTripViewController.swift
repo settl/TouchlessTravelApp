@@ -32,7 +32,7 @@ class SECurrentTripViewController: UIViewController {
         setupNotifications()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         switchViews()
     }
@@ -53,7 +53,7 @@ class SECurrentTripViewController: UIViewController {
         animationGroup.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         animationGroup.animations = [fadeAnimation, scaleAnimation]
         
-        self.circleView!.layer.addAnimation(animationGroup, forKey: "scaleAndFade")
+        self.circleView!.layer.add(animationGroup, forKey: "scaleAndFade")
     }
  
     func createQRCode() {
@@ -61,7 +61,7 @@ class SECurrentTripViewController: UIViewController {
         if self.qrCodeImage == nil {
             
             let url = self.client.createQRCodeFromURL()
-            let data = url.dataUsingEncoding(NSISOLatin1StringEncoding, allowLossyConversion: false)
+            let data = url.data(using: String.Encoding.isoLatin1.rawValue, allowLossyConversion: false)
             let filter = CIFilter(name: "CIQRCodeGenerator")
             
             filter!.setValue(data, forKey: "inputMessage")
@@ -76,45 +76,45 @@ class SECurrentTripViewController: UIViewController {
         
         let scaleX = qrCodeView!.frame.size.width / qrCodeImage.extent.size.width
         let scaleY = qrCodeView!.frame.size.height / qrCodeImage.extent.size.height
-        let transformedImage = qrCodeImage.imageByApplyingTransform(CGAffineTransformMakeScale(scaleX, scaleY))
+        let transformedImage = qrCodeImage.applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
         
-        qrCodeView!.image = UIImage(CIImage: transformedImage)
+        qrCodeView!.image = UIImage(ciImage: transformedImage)
     }
     
-    func handleStateChange(notification:NSNotification) {
+    func handleStateChange(_ notification:Notification) {
         
-        self.performSelector(#selector(SECurrentTripViewController.switchViews), withObject: self, afterDelay: 0.2)
+        self.perform(#selector(SECurrentTripViewController.switchViews), with: self, afterDelay: 0.2)
     }
     
     func switchViews() {
         
-        if (NSUserDefaults.standardUserDefaults().boolForKey("checkedIn") == true) {
-            self.circleBackgroundView?.hidden = true
-            self.navigationItem.setRightBarButtonItem(UIBarButtonItem(title: "Exit", style: .Plain, target: self, action: #selector(SECurrentTripViewController.buttonCheckOut)), animated: true)
+        if (UserDefaults.standard.bool(forKey: "checkedIn") == true) {
+            self.circleBackgroundView?.isHidden = true
+            self.navigationItem.setRightBarButton(UIBarButtonItem(title: "Exit", style: .plain, target: self, action: #selector(SECurrentTripViewController.buttonCheckOut)), animated: true)
             createQRCode()
         }
         else {
-            self.circleBackgroundView?.hidden = false
-            self.navigationItem.setRightBarButtonItem(UIBarButtonItem(title: "Go!", style: .Plain, target: self, action: #selector(SECurrentTripViewController.buttonCheckIn)), animated: true)
+            self.circleBackgroundView?.isHidden = false
+            self.navigationItem.setRightBarButton(UIBarButtonItem(title: "Go!", style: .plain, target: self, action: #selector(SECurrentTripViewController.buttonCheckIn)), animated: true)
             startAnimation()
         }
     }
     
     func buttonCheckIn() {
         
-        if (NSUserDefaults.standardUserDefaults().boolForKey("checkedIn") == false) {
+        if (UserDefaults.standard.bool(forKey: "checkedIn") == false) {
             
-            NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: true), forKey: "checkedIn")
-            NSNotificationCenter.defaultCenter().postNotificationName("manualCheckIn", object: nil)
+            UserDefaults.standard.set(NSNumber(value: true as Bool), forKey: "checkedIn")
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "manualCheckIn"), object: nil)
         }
     }
     
     func buttonCheckOut() {
         
-        if (NSUserDefaults.standardUserDefaults().boolForKey("checkedIn") == true) {
+        if (UserDefaults.standard.bool(forKey: "checkedIn") == true) {
             
-            NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: false), forKey: "checkedIn")
-            NSNotificationCenter.defaultCenter().postNotificationName("didExitRegion", object: nil)
+            UserDefaults.standard.set(NSNumber(value: false as Bool), forKey: "checkedIn")
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "didExitRegion"), object: nil)
         }
     }
     
@@ -131,23 +131,23 @@ class SECurrentTripViewController: UIViewController {
         self.timeLabel!.layer.masksToBounds = true
         self.timeLabel!.layer.cornerRadius = 5.0
         
-        self.dateLabel!.text = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .NoStyle)
-        self.timeLabel!.text = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .NoStyle, timeStyle: .ShortStyle)
+        self.dateLabel!.text = DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .none)
+        self.timeLabel!.text = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .short)
         
         self.circleView?.layer.cornerRadius = (self.circleView?.frame.size.height)!/2;
-        self.circleBackgroundView?.hidden = true
+        self.circleBackgroundView?.isHidden = true
     }
     
     func setupNotifications() {
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SECurrentTripViewController.handleStateChange(_:)), name: "didEnterRegion", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SECurrentTripViewController.handleStateChange(_:)), name: "didExitRegion", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SECurrentTripViewController.handleStateChange(_:)), name: "willEnterForeground", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SECurrentTripViewController.handleStateChange(_:)), name: "manualCheckIn", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SECurrentTripViewController.handleStateChange(_:)), name: NSNotification.Name(rawValue: "didEnterRegion"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SECurrentTripViewController.handleStateChange(_:)), name: NSNotification.Name(rawValue: "didExitRegion"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SECurrentTripViewController.handleStateChange(_:)), name: NSNotification.Name(rawValue: "willEnterForeground"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SECurrentTripViewController.handleStateChange(_:)), name: NSNotification.Name(rawValue: "manualCheckIn"), object: nil)
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func didReceiveMemoryWarning() {

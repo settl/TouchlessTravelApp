@@ -21,14 +21,14 @@ class SEReportsTableViewController: UITableViewController, HTTPClientDelegate {
         self.httpClient.getRidesRequest()
     }
 
-    func didReceiveData(json: [JSON]) {
+    func didReceiveData(_ json: [JSON]) {
         if let distance = json[0]["distance"].string{
             print(distance)
         }
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
