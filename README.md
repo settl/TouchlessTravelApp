@@ -43,7 +43,7 @@ The following figure visualizes the systems architecture:
 [Landing Page + Map](http://touchless-travel.herokuapp.com/webapp/index.html)
 
 ![screenshot](/readme_images/screenshot.png)
-
+<img src="/readme_images/app_idle.png" width="285"/> <img src="/readme_images/app_ticket.png" width="285"/> <img src="/readme_images/app_report.png" width="285"/> 
 
 ### Related Git Repositories
 
